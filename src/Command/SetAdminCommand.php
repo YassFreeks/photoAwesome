@@ -43,6 +43,7 @@ class SetAdminCommand extends Command
 
         $email = $input->getArgument('email');
 
+        // SELECT * FROM user WHERE email = 'yass@hotmail.com'
         $user = $this->userRepository->findOneBy(['email' => $email]);
 
         if ($user != null) {

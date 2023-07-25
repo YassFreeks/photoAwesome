@@ -1,0 +1,5 @@
+
+App\Entity\User:
+    user{0..500}:
+        email (unique): "<email()>"
+        password: "abc"
