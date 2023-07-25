@@ -1,9 +1,20 @@
+
+
+
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Edit Category{% endblock %}
 
 {% block body %}
+    <h1>Edit Category</h1>
 
-    <h1>Edit category</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.label) }}
 
+    <button>Submit</button>
+    {{ form_end(form) }}
 {% endblock %}
+
+
+
