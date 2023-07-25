@@ -9,7 +9,12 @@
     <ul>
         {% for category in categories %}
 
-            <li><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.label }}</a></li>
+            <li>
+                <a 
+                    href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.label }}
+                </a>
+                <a href="{{ path('app_category_delete', {'id': category.id}) }}">Supprimer</a>
+            </li>
 
         {% endfor %}
     </ul>

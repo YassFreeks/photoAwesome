@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route('/admin/category')]
 class CategoryController extends AbstractController
 {
@@ -19,8 +18,6 @@ class CategoryController extends AbstractController
     public function __construct(
         private CategoryRepository $categoryRepository,
         private EntityManagerInterface $entityManager
-
-
     )
     {
         
@@ -55,7 +52,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/add', name: 'app_category_show')]
+    #[Route('/add', name: 'app_category_add')]
     public function add(Request $request): Response
     {
 
@@ -64,7 +61,10 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
 
+            return $this->redirectToRoute('app_category');
         }
 
 
@@ -72,5 +72,20 @@ class CategoryController extends AbstractController
         return $this->render('category/add.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    #[Route('/delete/{id}', name: 'app_category_delete')]
+    public function delete($id): Response
+    {
+
+        $category = $this->categoryRepository->find($id);
+
+        if($category !== null) {
+            $this->entityManager->remove($category);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_category');
+
     }
 }
