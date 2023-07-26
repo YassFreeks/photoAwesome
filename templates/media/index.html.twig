@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MediaController!{% endblock %}
+
+{% block body %}
+{{ form_start(searchForm) }}
+    {{ form_row(searchForm.mediaTitle) }}
+    {{ form_row(searchForm.userEmail) }}
+    <button>Submit</button>
+{{ form_end(searchForm) }}
+
+
+{% for media in medias %}
+    <a href="">{{ media.title}}</a>
+{% endfor %}
+
+<h4>The total media is : {{ medias.getTotalItemCount }}</h4>
+
+{{ knp_pagination_render(medias) }}
+
+{% endblock %}
